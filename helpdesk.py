@@ -39,6 +39,15 @@ def listar_chamados():
         print("Nenhum chamado registrado.")
         return
 
+    print("\n--- Lista de Chamados ---")
+    for chamado in chamados:
+            print(
+                f"ID: {chamado['id']} |"
+                f" Nome: {chamado['nome']}|" 
+                f"Setor: {chamado['setor']} |"
+                f"Status: {chamado['status']}"
+            )
+
 def atualizar_status():
     if not chamados:
         print("\nNão há chamados para atualizar.")
@@ -68,16 +77,9 @@ def atualizar_status():
             else:
                 print("Opção inválida!")
             return
-        print("Chamado não encontrado.")
+    print("Chamado não encontrado.")
 
-    print("\n--- Lista de Chamados ---")
-    for chamado in chamados:
-        print(
-            f"ID: {chamado['id']} |"
-            f" Nome: {chamado['nome']}|" 
-            f"Setor: {chamado['setor']} |"
-            f"Status: {chamado['status']}"
-        )
+    
 
 def main():
     while True:
