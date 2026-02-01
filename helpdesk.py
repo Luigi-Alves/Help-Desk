@@ -1,3 +1,9 @@
+# Lista que armazena todos os chamados
+chamados = []
+
+#Variáveis globais para controle de IDs
+proximo_id = 1
+
 def menu():
     print("\n=== SISTEMA DE CHAMADOS ===")
     print("1 - Abrir chamado")
@@ -7,6 +13,40 @@ def menu():
     print("5 - Relatório")
     print("6 - Sair")
 
+def abrir_chamado():
+    global proximo_id
+
+    print("\n--- Abrir Chamado ---")
+    nome = input("Nome do solicitante: ")
+    setor = input("Setor: ")
+    descricao = input("Descrição do problema: ")
+
+    chamado = {
+        "id": proximo_id,
+        "nome": nome,
+        "setor": setor,
+        "descricao": descricao,
+        "status": "Aberto"
+    }
+
+    chamados.append(chamado)
+    proximo_id += 1
+    print("Chamado aberto com sucesso!")
+
+
+def listar_chamados():
+    if not chamados:
+        print("Nenhum chamado registrado.")
+        return
+
+    print("\n--- Lista de Chamados ---")
+    for chamado in chamados:
+        print(
+            f"ID: {chamado['id']} |"
+            f" Nome: {chamado['nome']}|" 
+            f"Setor: {chamado['setor']} |"
+            f"Status: {chamado['status']}"
+        )
 
 def main():
     while True:
@@ -14,9 +54,9 @@ def main():
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            print("Abrir chamado (em desenvolvimento)")
+            abrir_chamado()
         elif opcao == "2":
-            print("Listar chamados (em desenvolvimento)")
+            listar_chamados()
         elif opcao == "3":
             print("Atualizar status (em desenvolvimento)")
         elif opcao == "4":
