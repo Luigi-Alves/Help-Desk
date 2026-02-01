@@ -79,7 +79,50 @@ def atualizar_status():
             return
     print("Chamado não encontrado.")
 
+def relatorio():
+    if not chamados:
+        print("\nNenhum chamado registrado.")
+        return
     
+    total_chamados = len(chamados)
+    abertos = 0
+    andamento = 0
+    fechados = 0
+
+    for chamado in chamados:
+        if chamado["status"] == "Aberto":
+            abertos += 1
+        elif chamado["status"] == "Em andamento":
+            andamento += 1
+        elif chamado["status"] == "Fechado":
+            fechados += 1
+    
+    print("\n--- Relatório de Chamados ---")
+    print(f"Total de chamados: {total_chamados}")
+    print(f"Chamados abertos: {abertos}")
+    print(f"Chamados em andamento: {andamento}")
+    print(f"Chamados fechados: {fechados}")
+
+def fechar_chamado():
+    if not chamados:
+        print("\nNão há chamados para fechar.")
+        return
+    
+    try:
+        id_chamado = int(input("Digite o ID do chamado a ser fechado: "))
+    except ValueError:
+        print("ID inválido.")
+        return
+    
+    for chamado in chamados:
+        if chamado["id"] == id_chamado:
+            if chamado["status"] == "Fechado":
+                print("O chamado já está fechado.")
+            else:
+                chamado["status"] = "Fechado"
+                print("Chamado fechado com sucesso!")
+            return
+    print("Chamado não encontrado.")
 
 def main():
     while True:
@@ -93,9 +136,9 @@ def main():
         elif opcao == "3":
             atualizar_status()
         elif opcao == "4":
-            print("Fechar chamado (em desenvolvimento)")
+            fechar_chamado()
         elif opcao == "5":
-            print("Relatório (em desenvolvimento)")
+            relatorio()
         elif opcao == "6":
             print("Saindo do sistema...")
             break
