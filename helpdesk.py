@@ -39,6 +39,37 @@ def listar_chamados():
         print("Nenhum chamado registrado.")
         return
 
+def atualizar_status():
+    if not chamados:
+        print("\nNão há chamados para atualizar.")
+        return
+    
+
+    try:
+        id_chamado = int(input("Digite o ID do chamado:"))
+    except ValueError:
+        print("ID inválido. Digite um número.")
+        return
+    
+    for chamado in chamados:
+        if chamado["id"] == id_chamado:
+            print("\nStatus atual:", chamado["status"])
+            print("1 - Em andamento")
+            print("2 - Fechado")
+
+            opcao = input("Escolha o novo status: ")
+
+            if opcao == "1":
+                chamado["status"] = "Em andamento"
+                print("Status atualizado com sucesso!")
+            elif opcao == "2":
+                chamado["status"] = "Fechado"
+                print("Chamado fechado com sucesso!")
+            else:
+                print("Opção inválida!")
+            return
+        print("Chamado não encontrado.")
+
     print("\n--- Lista de Chamados ---")
     for chamado in chamados:
         print(
@@ -58,7 +89,7 @@ def main():
         elif opcao == "2":
             listar_chamados()
         elif opcao == "3":
-            print("Atualizar status (em desenvolvimento)")
+            atualizar_status()
         elif opcao == "4":
             print("Fechar chamado (em desenvolvimento)")
         elif opcao == "5":
