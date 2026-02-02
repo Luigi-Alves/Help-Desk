@@ -1,3 +1,5 @@
+import json
+
 # Lista que armazena todos os chamados
 chamados = []
 
@@ -31,6 +33,7 @@ def abrir_chamado():
 
     chamados.append(chamado)
     proximo_id += 1
+    salvar_dados()
     print("Chamado aberto com sucesso!")
 
 
@@ -70,9 +73,11 @@ def atualizar_status():
 
             if opcao == "1":
                 chamado["status"] = "Em andamento"
+                salvar_dados()
                 print("Status atualizado com sucesso!")
             elif opcao == "2":
                 chamado["status"] = "Fechado"
+                salvar_dados()
                 print("Chamado fechado com sucesso!")
             else:
                 print("Opção inválida!")
@@ -120,11 +125,31 @@ def fechar_chamado():
                 print("O chamado já está fechado.")
             else:
                 chamado["status"] = "Fechado"
+                salvar_dados()
                 print("Chamado fechado com sucesso!")
             return
     print("Chamado não encontrado.")
 
+
+def salvar_dados():
+    with open("chamados.json", "w", encoding="utf-8") as arquivo:
+        json.dump(chamados, arquivo, indent=4, ensure_ascii=False)
+
+
+def carregar_dados():
+    global chamados, proximo_id
+    try:
+        with open("chamados.json", "r", encoding="utf-8") as arquivo:
+            chamados = json.load(arquivo)
+            if chamados:
+                proximo_id = max(chamado["id"] for chamado in chamados) + 1
+            else:
+                proximo_id = 1
+    except FileNotFoundError:
+        chamados = []
+
 def main():
+    carregar_dados()
     while True:
         menu()
         opcao = input("Escolha uma opção: ")
