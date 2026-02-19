@@ -2,6 +2,7 @@ import json
 
 # Lista que armazena todos os chamados
 chamados = []
+usuarios_logado = None
 
 #Variáveis globais para controle de IDs
 proximo_id = 1
@@ -148,22 +149,65 @@ def carregar_dados():
     except FileNotFoundError:
         chamados = []
 
+def carregar_usuarios():
+    global usuarios
+    try:
+        with open("usuarios.json", "r", encoding="utf-8") as arquivo:
+            usuarios = json.load(arquivo)
+    except FileNotFoundError:
+        usuarios = []
+
+def login():
+    global usuario_logado
+
+    print("\n--- LOGIN ---")
+    email = input("Usuário: ")
+    senha = input("Senha: ")
+
+    for usuario in usuarios:
+        if usuario["email"] == email and usuario["senha"] == senha:
+            usuario_logado = usuario
+            print(f"\nBem-vindo, {usuario['nome']}! ({usuario['tipo']})")
+            return True
+
+    print("Credenciais inválidas!")
+    return False
+
 def main():
     carregar_dados()
+    carregar_usuarios()
+
+    if not login():
+        return
+
     while True:
         menu()
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
             abrir_chamado()
+
         elif opcao == "2":
             listar_chamados()
+
         elif opcao == "3":
-            atualizar_status()
+            if usuario_logado["tipo"] in ["admin", "tecnico"]:
+                atualizar_status()
+            else:
+                print("Apenas técnicos ou administradores podem atualizar chamados.")
+
         elif opcao == "4":
-            fechar_chamado()
+            if usuario_logado["tipo"] in ["admin", "tecnico"]:
+                fechar_chamado()
+            else:
+                print("Apenas técnicos ou administradores podem fechar chamados.")
+
         elif opcao == "5":
-            relatorio()
+            if usuario_logado["tipo"] == "admin":
+                relatorio()
+            else:
+                print("Apenas administradores podem acessar relatórios.")
+
         elif opcao == "6":
             print("Saindo do sistema...")
             break

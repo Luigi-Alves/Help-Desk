@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "nome": "Admin",
+    "email": "admin@email.com",
+    "senha": "$pbkdf2-sha256$...",
+    "tipo": "admin"
+  }
+]
