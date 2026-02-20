@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
 # Lista que armazena todos os chamados
@@ -14,7 +15,42 @@ def menu():
     print("3 - Atualizar status do chamado")
     print("4 - Fechar chamado")
     print("5 - Relatório")
-    print("6 - Sair")
+    print("6 - Cadastrar usuário (admin)")
+    print("7 - Sair")
+
+def casdastro_usuario():
+    global usuarios
+
+    print("\n--- Cadastro de Usuário ---")
+    nome = input("Nome: ")
+    email = input("Email: ")
+    senha = input("Senha: ")
+    tipo = input("Tipo (admin/tecnico/comum): ")
+
+    if tipo not in ["admin", "tecnico", "comum"]:
+        print("Tipo de usuário inválido!")
+        return
+    
+    for usuario in usuarios:
+        if usuario["email"] == email:
+            print("Email já cadastrado!")
+            return
+        
+    novo_usuario = {
+        "id": len(usuarios) + 1,
+        "nome": nome,
+        "email": email,
+        "senha": generate_password_hash(senha),
+        "tipo": tipo
+    }
+
+    usuarios.append(novo_usuario)
+    salvar_dados()
+    print("Usuário cadastrado com sucesso!")
+
+def salvar_usuarios():
+    with open("usuarios.json", "w", encoding="utf-8") as arquivo:
+        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
 
 def abrir_chamado():
     global proximo_id
@@ -165,7 +201,7 @@ def login():
     senha = input("Senha: ")
 
     for usuario in usuarios:
-        if usuario["email"] == email and usuario["senha"] == senha:
+        if usuario["email"] == email and check_password_hash(usuario["senha"], senha):
             usuario_logado = usuario
             print(f"\nBem-vindo, {usuario['nome']}! ({usuario['tipo']})")
             return True
@@ -209,6 +245,12 @@ def main():
                 print("Apenas administradores podem acessar relatórios.")
 
         elif opcao == "6":
+            if usuario_logado["tipo"] == "admin":
+                casdastro_usuario()
+            else:
+                print("Apenas administradores podem cadastrar novos usuários.")
+        
+        elif opcao == "7":
             print("Saindo do sistema...")
             break
         else:
