@@ -3,7 +3,35 @@
         "id": 1,
         "nome": "Administrador",
         "email": "admin",
-        "senha": "cole_aqui_o_hash",
+        "senha": "scrypt:32768:8:1$VwnWYIxkVVo5p4yl$be511be9962d55b729270dd3a28c07f0585ec58236de2cbf5a5ec16c3dae21e4786e5224a1f25acc9d36331c52bc9d2dbdfffc13537a8687903d700352b550cf",
         "tipo": "admin"
+    },
+    {
+        "id": 2,
+        "nome": "João Silva",
+        "email": "joao@helpdesk.com",
+        "senha": "scrypt:32768:8:1$McMdA7cd1UBO50EZ$2471882f26b03a33afc884093e6b9c7f868424c6c70e9e2aeb68a18cc5316a1bce9da7e0099d803f34e426442b2dbec171514b4c08489d31467a931e32ddeb8b",
+        "tipo": "tecnico"
+    },
+    {
+        "id": 3,
+        "nome": "Maria Santos",
+        "email": "maria@helpdesk.com",
+        "senha": "scrypt:32768:8:1$uXXqN3OhgK6p8Upe$5ec0a654f799c058d177e1501dc8187ddeed98d0df7df6459e3ee1d8aa8ee9e6de22ae1ff3d1e0ae6c20efb9a30f3da778243e6f18962d2a41dca75f825a9778",
+        "tipo": "tecnico"
+    },
+    {
+        "id": 4,
+        "nome": "Pedro Oliveira",
+        "email": "pedro@empresa.com",
+        "senha": "scrypt:32768:8:1$8GXBwkZjKx0BU9W7$1314e857baf37aa9601f95145810ba11f422e2244d75b4472dc2222170b47f83a8897df50f206d91f2439c15985f20fddd892fc1b231517ab5c7940304c77bdd",
+        "tipo": "comum"
+    },
+    {
+        "id": 5,
+        "nome": "Ana Costa",
+        "email": "ana@empresa.com",
+        "senha": "scrypt:32768:8:1$AjcCKBmWTTI3YgTy$76ea51b111965b59dcd500597f3b0a91848c85bfb26131968235dce985a94bc20b694fd4552e3ae50f37400463d3b664b06f244bf0b03b00dfa17c72834c08b2",
+        "tipo": "comum"
     }
 ]

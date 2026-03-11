@@ -1,9 +1,26 @@
 [
-  {
-    "id": 1,
-    "nome": "Luigi",
-    "setor": "TI",
-    "descricao": "Erro ao acessar o sistema",
-    "status": "Aberto"
-  }
+    {
+        "id": 1,
+        "nome": "Luigi",
+        "setor": "TI",
+        "descricao": "Erro ao acessar o sistema",
+        "status": "Aberto",
+        "criador": "admin",
+        "tecnico_atribuido": null,
+        "data_criacao": "10/03/2026 14:30:00",
+        "data_atualizacao": "10/03/2026 14:30:00",
+        "data_fechamento": null
+    },
+    {
+        "id": 2,
+        "nome": "Pedro Oliveira",
+        "setor": "Financeiro",
+        "descricao": "Erro ao acessar sistema de contas",
+        "status": "Em andamento",
+        "criador": "pedro@empresa.com",
+        "tecnico_atribuido": "joao@helpdesk.com",
+        "data_criacao": "10/03/2026 14:01:58",
+        "data_atualizacao": "10/03/2026 18:05:06",
+        "data_fechamento": null
+    }
 ]
