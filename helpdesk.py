@@ -13,11 +13,11 @@ def menu_principal():
     tipo_usuario = usuario_logado["tipo"]
     
     print("\n" + "="*50)
-    print(f"🔐 SISTEMA DE CHAMADOS | Usuário: {usuario_logado['nome']} ({tipo_usuario.upper()})")
+    print(f" SISTEMA DE CHAMADOS | Usuário: {usuario_logado['nome']} ({tipo_usuario.upper()})")
     print("="*50)
     
     if tipo_usuario == "admin":
-        print("\n📋 MENU ADMINISTRATIVO")
+        print("\n MENU ADMINISTRATIVO")
         print("1 - Abrir chamado")
         print("2 - Listar todos os chamados")
         print("3 - Atualizar status do chamado")
@@ -29,7 +29,7 @@ def menu_principal():
         print("9 - Logout")
         print("0 - Sair")
     elif tipo_usuario == "tecnico":
-        print("\n🔧 MENU TÉCNICO")
+        print("\n MENU TÉCNICO")
         print("1 - Listar chamados atribuídos")
         print("2 - Atualizar status do chamado")
         print("3 - Fechar chamado")
@@ -38,7 +38,7 @@ def menu_principal():
         print("6 - Logout")
         print("0 - Sair")
     else:  # usuario comum
-        print("\n👤 MENU DO USUÁRIO")
+        print("\n MENU DO USUÁRIO")
         print("1 - Abrir novo chamado")
         print("2 - Acompanhar meus chamados")
         print("3 - Relatório de meus chamados")
@@ -51,30 +51,30 @@ def menu_principal():
 def cadastro_usuario():
     """Apenas administrador pode cadastrar novos usuários"""
     if usuario_logado["tipo"] != "admin":
-        print("❌ Apenas administradores podem cadastrar novos usuários.")
+        print(" Apenas administradores podem cadastrar novos usuários.")
         return
     
     global usuarios
 
-    print("\n--- 👤 Cadastro de Novo Usuário ---")
+    print("\n---  Cadastro de Novo Usuário ---")
     nome = input("Nome: ").strip()
     if not nome:
-        print("❌ Nome não pode estar vazio!")
+        print(" Nome não pode estar vazio!")
         return
     
     email = input("Email: ").strip()
     if not email:
-        print("❌ Email não pode estar vazio!")
+        print(" Email não pode estar vazio!")
         return
     
     # Validar email existente
     if any(u["email"] == email for u in usuarios):
-        print("❌ Email já cadastrado no sistema!")
+        print(" Email já cadastrado no sistema!")
         return
     
     senha = input("Senha: ").strip()
     if not senha:
-        print("❌ Senha não pode estar vazia!")
+        print(" Senha não pode estar vazia!")
         return
     
     print("\nTipos de usuário disponíveis:")
@@ -86,7 +86,7 @@ def cadastro_usuario():
     tipo_map = {"1": "admin", "2": "tecnico", "3": "comum"}
     
     if tipo not in tipo_map:
-        print("❌ Opção inválida!")
+        print(" Opção inválida!")
         return
     
     tipo = tipo_map[tipo]
@@ -101,20 +101,20 @@ def cadastro_usuario():
 
     usuarios.append(novo_usuario)
     salvar_usuarios()
-    print(f"✅ Usuário '{nome}' ({tipo}) cadastrado com sucesso!")
+    print(f" Usuário '{nome}' ({tipo}) cadastrado com sucesso!")
 
 def listar_usuarios():
     """Lista todos os usuários (apenas admin)"""
     if usuario_logado["tipo"] != "admin":
-        print("❌ Apenas administradores podem listar usuários.")
+        print(" Apenas administradores podem listar usuários.")
         return
     
     if not usuarios:
-        print("\n📭 Nenhum usuário cadastrado.")
+        print("\n Nenhum usuário cadastrado.")
         return
     
     print("\n" + "="*70)
-    print("👥 LISTA DE USUÁRIOS")
+    print(" LISTA DE USUÁRIOS")
     print("="*70)
     print(f"{'ID':<5} {'Nome':<20} {'Email':<25} {'Tipo':<10}")
     print("-"*70)
@@ -128,7 +128,7 @@ def login():
     global usuario_logado
 
     print("\n" + "="*50)
-    print("🔐 SISTEMA DE LOGIN")
+    print(" SISTEMA DE LOGIN")
     print("="*50)
     
     email = input("Email: ").strip()
@@ -137,37 +137,37 @@ def login():
     for usuario in usuarios:
         if usuario["email"] == email and check_password_hash(usuario["senha"], senha):
             usuario_logado = usuario
-            print(f"\n✅ Bem-vindo, {usuario['nome']}!")
+            print(f"\n Bem-vindo, {usuario['nome']}!")
             print(f"   Tipo de acesso: {usuario['tipo'].upper()}")
             input("Pressione ENTER para continuar...")
             return True
 
-    print("\n❌ Credenciais inválidas! Email ou senha incorretos.")
+    print("\n Credenciais inválidas! Email ou senha incorretos.")
     return False
 
 def logout():
     """Função de logout"""
     global usuario_logado
-    print(f"\n👋 Logout realizado. Até logo, {usuario_logado['nome']}!")
+    print(f"\n Logout realizado. Até logo, {usuario_logado['nome']}!")
     usuario_logado = None
 
 # --- Funções de Chamados ---
 def abrir_chamado():
     global proximo_id
 
-    print("\n--- 📝 Abrir Novo Chamado ---")
+    print("\n--- Abrir Novo Chamado ---")
     nome = input("Nome do solicitante (ou ENTER para usar seu nome): ").strip()
     if not nome:
         nome = usuario_logado["nome"]
     
     setor = input("Setor: ").strip()
     if not setor:
-        print("❌ Setor não pode estar vazio!")
+        print(" Setor não pode estar vazio!")
         return
     
-    descricao = input("Descrição do problema: ").strip()
+    descricao = input(" Descrição do problema: ").strip()
     if not descricao:
-        print("❌ Descrição não pode estar vazia!")
+        print(" Descrição não pode estar vazia!")
         return
 
     chamado = {
@@ -186,12 +186,12 @@ def abrir_chamado():
     chamados.append(chamado)
     proximo_id += 1
     salvar_chamados()
-    print(f"\n✅ Chamado #{proximo_id - 1} aberto com sucesso!")
+    print(f"\n Chamado #{proximo_id - 1} aberto com sucesso!")
 
 def listar_chamados_filtrados(filtro_tipo=None):
     """Lista chamados com filtros baseado no tipo de usuário"""
     if not chamados:
-        print("\n📭 Nenhum chamado registrado.")
+        print("\n Nenhum chamado registrado.")
         return
 
     lista_filtrada = chamados
@@ -222,7 +222,7 @@ def listar_chamados_filtrados(filtro_tipo=None):
 def atualizar_status():
     """Aqui somente admin e técnico podem atualizar"""
     if not chamados:
-        print("\n📭 Não há chamados para atualizar.")
+        print("\n Não há chamados para atualizar.")
         return
     
     # Mostrar chamados disponíveis
@@ -242,12 +242,12 @@ def atualizar_status():
     try:
         id_chamado = int(input("\nDigite o ID do chamado: "))
     except ValueError:
-        print("❌ ID inválido. Digite um número.")
+        print(" ID inválido. Digite um número.")
         return
     
     for chamado in chamados:
         if chamado["id"] == id_chamado:
-            print(f"\n📌 Status atual: {chamado['status']}")
+            print(f"\n Status atual: {chamado['status']}")
             print("1 - Em andamento")
             print("2 - Fechado")
 
@@ -257,28 +257,28 @@ def atualizar_status():
                 chamado["status"] = "Em andamento"
                 chamado["data_atualizacao"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 salvar_chamados()
-                print("✅ Status atualizado para 'Em andamento'!")
+                print(" Status atualizado para 'Em andamento'!")
             elif opcao == "2":
                 chamado["status"] = "Fechado"
                 chamado["data_atualizacao"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 chamado["data_fechamento"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 salvar_chamados()
-                print("✅ Chamado foi fechado com sucesso!")
+                print(" Chamado foi fechado com sucesso!")
             else:
-                print("❌ Opção inválida!")
+                print(" Opção inválida!")
             return
-    print("❌ Chamado não encontrado.")
+    print(" Chamado não encontrado.")
 
 def atribuir_tecnico():
     """Apenas administrador pode atribuir técnico"""
     if usuario_logado["tipo"] != "admin":
-        print("❌ Apenas administradores podem atribuir técnicos.")
+        print(" Apenas administradores podem atribuir técnicos.")
         return
     
     # Listar técnicos disponíveis
     tecnicos = [u for u in usuarios if u["tipo"] == "tecnico"]
     if not tecnicos:
-        print("❌ Nenhum técnico cadastrado no sistema.")
+        print(" Nenhum técnico cadastrado no sistema.")
         return
     
     print("\n--- Técnicos disponíveis ---")
@@ -288,17 +288,17 @@ def atribuir_tecnico():
     try:
         idx_tecnico = int(input("\nEscolha o número do técnico: ")) - 1
         if idx_tecnico < 0 or idx_tecnico >= len(tecnicos):
-            print("❌ Opção inválida!")
+            print(" Opção inválida!")
             return
         tecnico_selecionado = tecnicos[idx_tecnico]
     except ValueError:
-        print("❌ Número inválido!")
+        print(" Número inválido!")
         return
     
     # Listar chamados para atribuir
     chamados_abertos = [c for c in chamados if c["status"] in ["Aberto", "Em andamento"]]
     if not chamados_abertos:
-        print("❌ Nenhum chamado disponível para atribuir.")
+        print(" Nenhum chamado disponível para atribuir.")
         return
     
     print("\n--- Chamados disponíveis ---")
@@ -308,7 +308,7 @@ def atribuir_tecnico():
     try:
         id_chamado = int(input("\nDigite o ID do chamado a ser atribuído: "))
     except ValueError:
-        print("❌ ID inválido!")
+        print(" ID inválido!")
         return
     
     for chamado in chamados:
@@ -316,21 +316,21 @@ def atribuir_tecnico():
             chamado["tecnico_atribuido"] = tecnico_selecionado["email"]
             chamado["data_atualizacao"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             salvar_chamados()
-            print(f"✅ Chamado atribuído a {tecnico_selecionado['nome']}!")
+            print(f" Chamado atribuído a {tecnico_selecionado['nome']}!")
             return
     
-    print("❌ Chamado não encontrado.")
+    print(" Chamado não encontrado.")
 
 def fechar_chamado():
     """Admin e técnico podem fechar chamados"""
     if not chamados:
-        print("\n📭 Não há chamados para fechar.")
+        print("\n Não há chamados para fechar.")
         return
     
     # Listar chamados abertos
     chamados_abertos = [c for c in chamados if c["status"] != "Fechado"]
     if not chamados_abertos:
-        print("\n✅ Todos os chamados já estão fechados!")
+        print("\n Todos os chamados já estão fechados!")
         return
     
     print("\n--- Chamados abertos ---")
@@ -340,21 +340,21 @@ def fechar_chamado():
     try:
         id_chamado = int(input("\nDigite o ID do chamado a ser fechado: "))
     except ValueError:
-        print("❌ ID inválido!")
+        print(" ID inválido!")
         return
     
     for chamado in chamados:
         if chamado["id"] == id_chamado:
             if chamado["status"] == "Fechado":
-                print("⚠️ O chamado já está fechado.")
+                print(" O chamado já está fechado.")
             else:
                 chamado["status"] = "Fechado"
                 chamado["data_atualizacao"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 chamado["data_fechamento"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 salvar_chamados()
-                print("✅ Chamado fechado com sucesso!")
+                print(" Chamado fechado com sucesso!")
             return
-    print("❌ Chamado não encontrado.")
+    print(" Chamado não encontrado.")
 
 def relatorio():
     """Gera relatório baseado no tipo de usuário"""
@@ -370,7 +370,7 @@ def relatorio():
 def relatorio_admin():
     """Relatório completo para administrador"""
     if not chamados:
-        print("\n📭 Nenhum chamado registrado.")
+        print("\n Nenhum chamado registrado.")
         return
     
     total_chamados = len(chamados)
@@ -379,12 +379,12 @@ def relatorio_admin():
     fechados = sum(1 for c in chamados if c["status"] == "Fechado")
     
     print("\n" + "="*60)
-    print("📊 RELATÓRIO COMPLETO - ADMINISTRADOR")
+    print(" RELATÓRIO COMPLETO - ADMINISTRADOR")
     print("="*60)
     print(f"Total de chamados: {total_chamados}")
     print(f"  ✓ Abertos: {abertos}")
-    print(f"  ⚙️ Em andamento: {andamento}")
-    print(f"  ✔️ Fechados: {fechados}")
+    print(f"  ✓ Em andamento: {andamento}")
+    print(f"  ✓ Fechados: {fechados}")
     print(f"\nTaxa de conclusão: {(fechados/total_chamados*100):.1f}%")
     
     # Por setor
@@ -433,12 +433,12 @@ def relatorio_tecnico():
     fechados = sum(1 for c in chamados_tecnico if c["status"] == "Fechado")
     
     print("\n" + "="*60)
-    print(f"📊 RELATÓRIO DE CHAMADOS - {usuario_logado['nome'].upper()}")
+    print(f" RELATÓRIO DE CHAMADOS - {usuario_logado['nome'].upper()}")
     print("="*60)
     print(f"Total de chamados: {total}")
     print(f"  ✓ Abertos: {abertos}")
-    print(f"  ⚙️ Em andamento: {andamento}")
-    print(f"  ✔️ Fechados: {fechados}")
+    print(f"  ✓ Em andamento: {andamento}")
+    print(f"  ✓ Fechados: {fechados}")
     print(f"\nTaxa de conclusão: {(fechados/total*100):.1f}%")
     print("="*60)
 
@@ -447,7 +447,7 @@ def relatorio_usuario_comum():
     chamados_usuario = [c for c in chamados if c["criador"] == usuario_logado["email"]]
     
     if not chamados_usuario:
-        print("\n📭 Você não possui chamados abertos.")
+        print("\n Você não possui chamados abertos.")
         return
     
     total = len(chamados_usuario)
@@ -456,12 +456,12 @@ def relatorio_usuario_comum():
     fechados = sum(1 for c in chamados_usuario if c["status"] == "Fechado")
     
     print("\n" + "="*60)
-    print(f"📊 RELATÓRIO DE MEUS CHAMADOS - {usuario_logado['nome'].upper()}")
+    print(f" RELATÓRIO DE MEUS CHAMADOS - {usuario_logado['nome'].upper()}")
     print("="*60)
     print(f"Total de chamados: {total}")
     print(f"  ✓ Abertos: {abertos}")
-    print(f"  ⚙️ Em andamento: {andamento}")
-    print(f"  ✔️ Fechados: {fechados}")
+    print(f"  ✓ Em andamento: {andamento}")
+    print(f"  ✓ Fechados: {fechados}")
     print(f"\nTaxa de conclusão: {(fechados/total*100):.1f}%")
     print("="*60)
 
@@ -500,11 +500,11 @@ def main():
     carregar_usuarios()
 
     print("\n" + "="*50)
-    print("🎯 BEM-VINDO AO SISTEMA DE HELP DESK")
+    print(" BEM-VINDO AO SISTEMA DE HELP DESK")
     print("="*50)
 
     if not login():
-        print("\n⚠️ Sistema encerrado.")
+        print("\n Sistema encerrado.")
         return
 
     while usuario_logado:
@@ -534,10 +534,10 @@ def main():
             elif opcao == "9":
                 logout()
             elif opcao == "0":
-                print("\n👋 Encerrando o sistema...")
+                print("\n Encerrando o sistema...")
                 break
             else:
-                print("❌ Opção inválida!")
+                print(" Opção inválida!")
 
         # --- MENU DO TÉCNICO ---
         elif tipo == "tecnico":
@@ -554,10 +554,10 @@ def main():
             elif opcao == "6":
                 logout()
             elif opcao == "0":
-                print("\n👋 Encerrando o sistema...")
+                print("\n Encerrando o sistema...")
                 break
             else:
-                print("❌ Opção inválida!")
+                print(" Opção inválida!")
 
         # --- MENU DO USUÁRIO COMUM ---
         else:  # usuario_logado["tipo"] == "comum"
@@ -570,10 +570,10 @@ def main():
             elif opcao == "4":
                 logout()
             elif opcao == "0":
-                print("\n👋 Encerrando o sistema...")
+                print("\n Encerrando o sistema...")
                 break
             else:
-                print("❌ Opção inválida!")
+                print(" Opção inválida!")
 
 
 if __name__ == "__main__":
