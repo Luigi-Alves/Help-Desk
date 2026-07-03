@@ -1,0 +1,16 @@
+# Dependências atualizadas para Help Desk com melhorias
+
+Flask==2.3.2
+Flask-JWT-Extended==4.4.4
+Flask-SQLAlchemy==3.0.5
+SQLAlchemy==2.0.20
+Werkzeug==2.3.6
+python-dotenv==1.0.0
+schedule==1.2.0
+
+# Opcional para PostgreSQL (descomente se usar PostgreSQL)
+# psycopg2-binary==2.9.7
+
+# Ferramentas de desenvolvimento
+python-dateutil==2.8.2
+

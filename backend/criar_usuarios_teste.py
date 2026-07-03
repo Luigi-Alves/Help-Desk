@@ -17,7 +17,7 @@ def adicionar_usuario_teste():
         pass
     
     print("\n" + "="*50)
-    print("🔐 CRIADOR DE USUÁRIOS DE TESTE")
+    print(" CRIADOR DE USUÁRIOS DE TESTE")
     print("="*50)
     
     # Admin (senha: 123)
@@ -69,15 +69,15 @@ def adicionar_usuario_teste():
     with open("usuarios.json", "w", encoding="utf-8") as arquivo:
         json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
     
-    print("\n✅ Usuários de teste criados com sucesso!")
-    print("\n📋 Credenciais de teste (todos com senha '123'):")
+    print("\n Usuários de teste criados com sucesso!")
+    print("\n Credenciais de teste (todos com senha '123'):")
     print("-"*50)
-    print("\n👨‍💼 ADMINISTRADOR:")
+    print("\n ADMINISTRADOR:")
     print("  Email: admin")
     print("  Senha: 123")
     print("  Tipo: Admin - Acesso completo")
     
-    print("\n🔧 TÉCNICOS:")
+    print("\n TÉCNICOS:")
     print("  Email: joao@helpdesk.com")
     print("  Nome: João Silva")
     print("  Senha: 123")
@@ -86,7 +86,7 @@ def adicionar_usuario_teste():
     print("  Nome: Maria Santos")
     print("  Senha: 123")
     
-    print("\n👤 USUÁRIOS COMUNS:")
+    print("\n USUÁRIOS COMUNS:")
     print("  Email: pedro@empresa.com")
     print("  Nome: Pedro Oliveira")
     print("  Senha: 123")
